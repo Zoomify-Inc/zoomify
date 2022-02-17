@@ -12,6 +12,7 @@ Authlib = "^0.15.5"
 pyfiglet = "^0.8.post1"
 click = "^8.0.3"
 colorama = "^0.4.4"
+python-dotenv = "^0.19.2"
 
 [tool.poetry.dev-dependencies]
 

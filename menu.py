@@ -17,6 +17,8 @@ def message(str):
 def welcome():
   message("Welcome to Zoomify's Attendance Checker")
 
+# option = input("Enter L to login or E to exit: ")
+
 
 def welcome_menu():
   # print('PLEASE ENTER "L" TO LOGIN')
@@ -37,6 +39,8 @@ def login_menu():
   input('enter your username: ')
   getpass('Enter your password: ')
 
+  main_menu()
+
 def main_menu():
   message('Main Menu')
   title = '''
@@ -47,10 +51,68 @@ def main_menu():
   # instructions = 'Instructions: After the end of your meeting, you have access to some useful commands shown below!'
   print(title)
 
+  command_options = '''
+  Command Options:
+
+  - Check Attendance Report: "R"
+  - Data Visualization Tool: "V"
+  - Exit Program: "E"
+  '''
+  print(command_options)
+  option = input("Please Enter a Command > ")
+
+  if option.lower() == 'r':
+    attendance_report()
+  elif option.lower() == 'v':
+    data_visualization()
+  elif option.lower() == 'e':
+    exit()
+  else: 
+    print('you have entered a invalid option please try again.')
+
+
+
+
+def attendance_report():
+  print("this is your attendance report!")
+  command_options = '''
+  Command Options:
+  - Go Back: "B"
+  - Exit Program: "E"
+  '''
+
+  print(command_options)
+  option = input("Please Enter a Command > ")
+
+  if option.lower() == 'b':
+    main_menu()
+  if option.lower() == 'e':
+    exit()
+  else: 
+    print('you have entered a invalid option please try again.')
+
+
+
+def data_visualization():
+  print("DATA VISUALIZATION!")
+  command_options = '''
+  Command Options:
+  - Go Back: "B"
+  - Exit Program: "E"
+  '''
+
+  print(command_options)
+  option = input("Please Enter a Command > ")
+
+  if option.lower() == 'b':
+    main_menu()
+  elif option.lower() == 'e':
+    exit()
+  else: 
+    print('you have entered a invalid option please try again.')
 
 def exit():
   message('Thank you for using Zoomify')
-  print('close terminal to leave')
   sys.exit()
 
 
@@ -69,7 +131,6 @@ def options():
   
 
 if __name__ == '__main__':
-  # home_menu()
   welcome()
   welcome_menu()
   main_menu()

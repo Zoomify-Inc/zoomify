@@ -9,15 +9,21 @@ from getpass import getpass
 #   click.secho(pyfiglet.figlet_format("Welcome to Zoomify's"), fg="green", bold=False)
 #   click.secho(pyfiglet.figlet_format("Attendance Checker"), fg="red", bold=False)
 
+# function to create a message using the pyfiglet instructions 
 def message(str):
+  # creates a message variable that is set to the pyfiglet format for the str accquired from pyfiglet docs then it has an 
   message = pyfiglet.figlet_format(str)
+  # init ???? then it prints it according the to the variable 
   init(autoreset=True)
+  # then it prints it according the to the settings for how to use pyfiglet
   print(Style.BRIGHT + Fore.RED + message)
   
+# function that creates the welcome message for our app 
 def welcome():
+  # uses the message function passing in the below string 
   message("Welcome to Zoomify's Attendance Checker")
 
-
+# function to run the welcome menu 
 def welcome_menu():
   # print('PLEASE ENTER "L" TO LOGIN')
   option = input("Enter L to login or E to exit: ")
@@ -70,6 +76,6 @@ def options():
 
 if __name__ == '__main__':
   # home_menu()
-  welcome()
-  welcome_menu()
+  # welcome()
+  # welcome_menu()
   main_menu()

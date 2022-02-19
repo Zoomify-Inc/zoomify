@@ -1,6 +1,7 @@
 from authlib.jose import jwt
 import requests
 from requests import Response
+from datetime import date, datetime
 
 
 class Zoomify:
@@ -15,28 +16,25 @@ class Zoomify:
         self.users_url = f"{self.base_url}/report/users"
 
 
-    # Test route using my JWT, and a known meeting ID
-    # Report > meetings > meetingID
-    # {{baseUrl}}/report/meetings/:meetingId/participants?page_size=30
-    # Report >  users > userID > Meetings
-    # {{baseUrl}}/report/users/:userId/meetings?from=2018-09-13&to=2022-02-19&page_size=30
     def get_meeting_reports(self, email):
-        url = f"{self.users_url}/{email}/meetings"
-        print(url)
-        
-
+        url = f"{self.users_url}/{email}/meetings"        
+        now = datetime.now()
         # Here we will had to add an option of how far back we go checking meetings
         query_params = {
                 "from": "2018-09-13",
-                "to": "2022-02-19",
+                "to": str(now.strftime("%Y-%m-%d")),
                 "page_size": 30,
             }
-
         r = (requests.get(url, headers={"Authorization": f"Bearer {self.JWT}"},
         params=query_params)).json()
         
-        # return r
-        return r['meetings'][0]['id']
+        meetings = [print(i['id'], i['start_time']) for i in r['meetings']]
+        print(meetings)
+
+        # Allow user to select the meeting to display information
+        user_selection = input('Type in the meeting ID you would like to select: ')
+        return str(user_selection)
+        
 
         
         
@@ -49,11 +47,10 @@ class Zoomify:
         r = (requests.get(url, headers={"Authorization": f"Bearer {self.JWT}"}, 
         params=query_params)).json()
 
+        # participants still not removing duplicates
         participants = []
-        for p in r["ps"]:
-            participants.append(p["name"])
+        [participants.append(p["name"]) for p in r["participants"] if p not in participants]
         return participants
-
 
     def get_jwt_token(self):
         pass

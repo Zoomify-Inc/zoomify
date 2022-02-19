@@ -3,7 +3,6 @@ import click
 from colorama import init, Fore, Back, Style
 import sys
 from getpass import getpass
-# from simple_term_menu import TerminalMenu
 
 # @click.command()
 # def home_menu():

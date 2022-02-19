@@ -18,9 +18,9 @@ ZOOM_MEETING_ID = os.environ.get("ZOOM_MEETING_ID")
 
 if __name__ == "__main__":
     
-    print(f"Zoom API Key: {ZOOM_API_KEY}")
-    print(f"Zoom API Secret: {ZOOM_API_SECRET}")
-    print(f"Zoom JWT: {ZOOM_JWT}")
+    # print(f"Zoom API Key: {ZOOM_API_KEY}")
+    # print(f"Zoom API Secret: {ZOOM_API_SECRET}")
+    # print(f"Zoom JWT: {ZOOM_JWT}")
     
     # Consider writing all logic for CLI input/output in another module and running it here
 
@@ -28,7 +28,6 @@ if __name__ == "__main__":
     zoom = Zoomify(ZOOM_API_KEY, ZOOM_API_SECRET, ZOOM_JWT)
     email = "joshua.david.huston@gmail.com"
     resp = zoom.get_meeting_reports(email)
-    print(resp)
     participants = zoom.get_meeting_participants(resp)
     print(participants)
 

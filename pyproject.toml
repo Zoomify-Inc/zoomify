@@ -9,10 +9,11 @@ python = "^3.9"
 pytest = "^7.0.1"
 requests = "^2.27.1"
 Authlib = "^0.15.5"
-pyfiglet = "^0.8.post1"
 click = "^8.0.3"
 colorama = "^0.4.4"
 python-dotenv = "^0.19.2"
+pyfiglet = "^0.8.post1"
+
 
 [tool.poetry.dev-dependencies]
 

@@ -1,18 +1,17 @@
 import pyfiglet 
-import click
 from colorama import init, Fore, Back, Style
 import sys
 from getpass import getpass
 
-# @click.command()
-# def home_menu():
-#   click.secho(pyfiglet.figlet_format("Welcome to Zoomify's"), fg="green", bold=False)
-#   click.secho(pyfiglet.figlet_format("Attendance Checker"), fg="red", bold=False)
 
-def message(str, color=Fore.RED):
+def title_message(str, color=Fore.RED):
   message = pyfiglet.figlet_format(str)
   init(autoreset=True)
   print(Style.BRIGHT + color + message)
+
+def paragraph_message(str, color=Fore.RED):
+  init(autoreset=True)
+  print(Style.BRIGHT + color + str)
 
 # def test_menu():
 #   command_options_test = ["[r] apple", "[v] banana", "[e] orange"]
@@ -29,72 +28,82 @@ def message(str, color=Fore.RED):
   #   print('you have entered a invalid option please try again.')
 
 def command_options():
-  command_options = '''
+  command_options_menu = '''
   Command Options:
 
   - Check Attendance Report: "R"
   - Data Visualization Tool: "V"
   - Exit Program: "E"
   '''
-  print(command_options)
-  option = input("Please Enter a Command > ")
+  paragraph_message(command_options_menu, Fore.CYAN)
 
-  if option.lower() == 'r':
+  user_input = input("Please enter a command > ")
+
+
+  print()
+  if user_input.lower() == 'r':
     attendance_report()
-  elif option.lower() == 'v':
+  elif user_input.lower() == 'v':
     data_visualization()
-  elif option.lower() == 'e':
+  elif user_input.lower() == 'e':
     exit()
   else: 
-    print('you have entered a invalid option please try again.')
+    paragraph_message('You have entered a invalid option please try again.')
+    command_options()
 
   
 def welcome():
-  message("Welcome to Zoomify's Attendance Checker")
+  title_message("Welcome to Zoomify's Attendance Checker", Fore.BLUE)
 
 def welcome_menu():
-  option = input("Enter L to login or E to exit: ")
-  while option.lower() != 'e':
-    if option.lower() == 'l':
+  init(autoreset=True)
+  user_input = input("Enter 'L' to login or 'E' to exit > ")
+
+  while user_input.lower() != 'e':
+    if user_input.lower() == 'l':
       login_menu()
     else: 
-      print('you have entered a invalid option please try again.')
+      paragraph_message('You have entered a invalid option please try again.')
     print()
     welcome_menu()
-  if option.lower() == 'e':
+  if user_input.lower() == 'e':
     exit()
 
 def login_menu():
   # need to update login look 
-  message("Please Login using your AuthO creds!")
-  input('enter your username: ')
-  getpass('Enter your password: ')
+  title_message("Please login using your AuthO credentials!", Fore.GREEN)
+  input('Enter your username > ')
+  getpass('Enter your password > ')
 
   main_menu()
 
 def main_menu():
-  message('Main Menu')
+  title_message('Main Menu', Fore.GREEN)
   title = '''
   Let's Get Started!
-  ******************
+        ---
+  *************************************************************************************************
+
   Instructions: After the end of your meeting, you have access to some useful commands shown below!
+
+  *************************************************************************************************
   '''
-  print(title)
+  paragraph_message(title, Fore.LIGHTGREEN_EX)
   command_options()
 
 
 def attendance_report():
-  message("Attendance Report", Fore.BLUE)
+  title_message("Attendance Report", Fore.GREEN)
   command_options()
 
 
 def data_visualization():
-  message("Data Visualization", Fore.BLUE)
+  title_message("Data Visualization", Fore.GREEN)
   command_options()
 
 
 def exit():
-  message('Thank you for using Zoomify')
+  title_message('Thank you for using Zoomify', Fore.LIGHTYELLOW_EX)
   sys.exit()
 
 

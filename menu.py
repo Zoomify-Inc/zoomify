@@ -1,5 +1,5 @@
 from re import L
-import pyfiglet 
+import pyfiglet
 from colorama import init, Fore, Back, Style
 import sys
 from getpass import getpass
@@ -15,7 +15,7 @@ ZOOM_JWT = os.environ.get("ZOOM_JWT")
 
 # Instantiate Zoomify object
 zoom = Zoomify(ZOOM_API_KEY, ZOOM_API_SECRET, ZOOM_JWT)
-
+participants = []
 
 def title_message(str, color=Fore.RED):
   message = pyfiglet.figlet_format(str)
@@ -32,6 +32,7 @@ def command_options():
 
   - Check Attendance Report: "R"
   - Data Visualization Tool: "V"
+  - Main Menu: "M"
   - Exit Program: "E"
   '''
   paragraph_message(command_options_menu, Fore.CYAN)
@@ -44,6 +45,8 @@ def command_options():
     attendance_report()
   elif user_input.lower() == 'v':
     data_visualization()
+  elif user_input.lower() == 'm':
+    main_menu()
   elif user_input.lower() == 'e':
     exit()
   else: 
@@ -68,12 +71,6 @@ def welcome_menu():
   if user_input.lower() == 'e':
     exit()
 
-# def login_menu():
-#   # need to update login lo
-#  # getpass('Enter your password > ')
-#   re# getpass('Enter your password > ')
-#   main_menu()
-
 def main_menu():
   title_message('Main Menu', Fore.GREEN)
   title = '''
@@ -89,14 +86,21 @@ def main_menu():
   email = input("Enter your email > ")
   # print(email)
   uuid = zoom.get_meeting_reports(email)
- 
+  global participants
   participants = zoom.get_meeting_participants(uuid)
-  # print(participants)
+  
   command_options()
 
 
 def attendance_report():
   title_message("Attendance Report", Fore.GREEN)
+  global participants
+  attendance = zoom.check_attendance(participants)
+  # print(attendance)
+  # print("\n Attendees \n ---------")
+  # for name in participants: 
+  #   print(f'{name}')
+  
   command_options()
 
 

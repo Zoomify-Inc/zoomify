@@ -2,6 +2,7 @@ from authlib.jose import jwt
 import requests
 from requests import Response
 from datetime import date, datetime
+import math
 
 
 class Zoomify:
@@ -32,7 +33,7 @@ class Zoomify:
         self.format_meetings(meetings)
         
         # Allow user to select the meeting to display information
-        user_selection = int(input('Type which meeting you would like to select: '))
+        user_selection = int(input('\n Type which meeting you would like to select: '))
         return meetings[user_selection]['uuid']
 
 
@@ -64,9 +65,22 @@ class Zoomify:
         participants = []
         [participants.append(p["name"]) for p in r["participants"] if p["name"] not in participants]
         
-        # print("\n Attendees \n ---------")
-        # for name in participants: 
-        #     print(f'{name}')
         
+
         return participants
 
+    def check_attendance(self, participants):
+        # sample_attendance = ['Roger Huba', 'Joshua Huston', 'Alex Payne' ]
+        arrived_users = len(participants)
+        user_input_num = input("Please enter the amount of participants expected to be in the meeting > ")
+        expected_attendance = int(user_input_num)
+        sum_of_users = arrived_users / expected_attendance * 100
+
+        print("\n Attendees \n ---------")
+        for name in participants: 
+            print(f'{name}')
+
+        print(f" ---------\n {arrived_users} out of {expected_attendance} participants were in the meeting! {math.trunc(sum_of_users)}% of your expected participants arrived. ")
+        return participants
+
+        

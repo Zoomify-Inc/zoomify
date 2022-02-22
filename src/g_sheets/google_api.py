@@ -46,7 +46,7 @@ class GoogleSheet():
 
         # Add the desired headers
         headers = ['Name', 'Join Time', 'Leave Time', 'Email', 'UUID']
-        self.update_headers(headers, 1)
+        self.update_headers(headers, page_number)
 
         # Specify page number to insert data
         wks = self.sheet[page_number]
@@ -54,12 +54,22 @@ class GoogleSheet():
         for i in range(len(data)):
             columns = 5
             data_dict = {0: 'name', 1: 'join_time', 2: 'leave_time', 3: 'user_email', 4: 'id'}
-            # Starts from row 2 to fill A2-E2
+    
             for j in range(columns):   
                 cell = wks.cell(alphabet[j] + str(i + 2))
                 key = data_dict[j]
                 cell.value = data[i][key]
-                cell.update()
+
+        # Identify start and end of cell range   
+        start_cell = 'A2'
+        end_cell = 'E' + str(len(data) + 1)
+
+        # Update all cells
+        rows = wks.range('%s:%s' % (start_cell, end_cell))
+        for row in rows:
+            wks.update_cells(row)
+
+        
 
 
             
@@ -74,4 +84,4 @@ if __name__ == '__main__':
     data = json.load(f)
     participants = data['participants']
 
-    googleSheet.add_participants(participants, 1)
+    googleSheet.add_participants(participants, 0)

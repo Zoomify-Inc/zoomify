@@ -1,119 +1,123 @@
-import pyfiglet 
-import click
+from re import L
+import pyfiglet
 from colorama import init, Fore, Back, Style
 import sys
 from getpass import getpass
+from dotenv import load_dotenv
+import os
+from src.zoomify import Zoomify
 
-# @click.command()
-# def home_menu():
-#   click.secho(pyfiglet.figlet_format("Welcome to Zoomify's"), fg="green", bold=False)
-#   click.secho(pyfiglet.figlet_format("Attendance Checker"), fg="red", bold=False)
 
-def message(str, color=Fore.RED):
-  message = pyfiglet.figlet_format(str)
-  init(autoreset=True)
-  print(Style.BRIGHT + color + message)
-
-# def test_menu():
-#   command_options_test = ["[r] apple", "[v] banana", "[e] orange"]
-#   terminal_menu = TerminalMenu(command_options_test, title="command_options_test")
-#   menu_entry_index = terminal_menu.show()
-
-  # if terminal_menu == 'r':
-  #   attendance_report()
-  # elif terminal_menu == 'v':
-  #   data_visualization()
-  # elif terminal_menu == 'e':
-  #   exit()
-  # else: 
-  #   print('you have entered a invalid option please try again.')
-
-def command_options():
-  command_options = '''
-  Command Options:
-
-  - Check Attendance Report: "R"
-  - Data Visualization Tool: "V"
-  - Exit Program: "E"
-  '''
-  print(command_options)
-  option = input("Please Enter a Command > ")
-
-  if option.lower() == 'r':
-    attendance_report()
-  elif option.lower() == 'v':
-    data_visualization()
-  elif option.lower() == 'e':
-    exit()
-  else: 
-    print('you have entered a invalid option please try again.')
-
+class Menu:
   
-def welcome():
-  message("Welcome to Zoomify's Attendance Checker")
+  def __init__(self, zoom=None, participants=[]):
+    self.participants = participants
+    self.zoom = zoom
 
-def welcome_menu():
-  option = input("Enter L to login or E to exit: ")
-  while option.lower() != 'e':
-    if option.lower() == 'l':
-      login_menu()
-    else: 
-      print('you have entered a invalid option please try again.')
+  # Pull in environment variables
+  def get_env_vars(self):
+    load_dotenv()
+    ZOOM_API_KEY = os.environ.get("ZOOM_API_KEY")
+    ZOOM_API_SECRET = os.environ.get("ZOOM_API_SECRET")
+    ZOOM_JWT = os.environ.get("ZOOM_JWT")
+    self.zoom = Zoomify(ZOOM_API_KEY, ZOOM_API_SECRET, ZOOM_JWT)
+
+  # Instantiate Zoomify object
+
+  def title_message(self, str, color=Fore.RED):
+    message = pyfiglet.figlet_format(str)
+    init(autoreset=True)
+    print(Style.BRIGHT + color + message)
+
+  def paragraph_message(self, str, color=Fore.RED):
+    init(autoreset=True)
+    print(Style.BRIGHT + color + str)
+
+  def command_options(self):
+    command_options_menu = '''
+    Command Options:
+
+    - Check Attendance Report: "R"
+    - Data Visualization Tool: "V"
+    - Main Menu: "M"
+    - Exit Program: "E"
+    '''
+    self.paragraph_message(command_options_menu, Fore.CYAN)
+
+    user_input = input("Please enter a command > ")
+
+
     print()
-    welcome_menu()
-  if option.lower() == 'e':
-    exit()
+    if user_input.lower() == 'r':
+      self.attendance_report()
+    elif user_input.lower() == 'v':
+      self.data_visualization()
+    elif user_input.lower() == 'm':
+      self.main_menu()
+    elif user_input.lower() == 'e':
+      exit()
+    else: 
+      self.paragraph_message('You have entered a invalid option please try again.')
+      self.command_options()
 
-def login_menu():
-  # need to update login look 
-  message("Please Login using your AuthO creds!")
-  input('enter your username: ')
-  getpass('Enter your password: ')
+    
+  def welcome(self):
+    self.title_message("Welcome to Zoomify's Attendance Checker", Fore.BLUE)
 
-  main_menu()
+  def welcome_menu(self):
+    init(autoreset=True)
+    user_input = input("Enter 'L' to login or 'E' to exit > ")
 
-def main_menu():
-  message('Main Menu')
-  title = '''
-  Let's Get Started!
-  ******************
-  Instructions: After the end of your meeting, you have access to some useful commands shown below!
-  '''
-  print(title)
-  command_options()
+    while user_input.lower() != 'e':
+      if user_input.lower() == 'l':
+        self.main_menu()
+      else: 
+        self.paragraph_message('You have entered a invalid option please try again.')
+      print()
+      self.welcome_menu()
+    if user_input.lower() == 'e':
+      exit()
+
+  def main_menu(self):
+    self.title_message('Main Menu', Fore.GREEN)
+    title = '''
+    Let's Get Started!
+    
+    *****************************************************************************************************************
+
+    Instructions: After your meeting ends, please enter your email below to select a meeting to check attendance on!
+
+    *****************************************************************************************************************
+    '''
+    self.paragraph_message(title, Fore.LIGHTGREEN_EX)
+    email = input("Enter your email > ")
+    uuid = self.zoom.get_meeting_reports(email)
+    self.participants = self.zoom.get_meeting_participants(uuid)
+    
+    self.command_options()
 
 
-def attendance_report():
-  message("Attendance Report", Fore.BLUE)
-  command_options()
+  def attendance_report(self):
+    self.title_message("Attendance Report", Fore.GREEN)
+    attendance = self.zoom.check_attendance(self.participants)    
+    self.command_options()
 
 
-def data_visualization():
-  message("Data Visualization", Fore.BLUE)
-  command_options()
+  def data_visualization(self):
+    self.title_message("Data Visualization", Fore.GREEN)
+    self.command_options()
 
+  def exit(self):
+    self.title_message('Thank you for using Zoomify', Fore.LIGHTYELLOW_EX)
+    sys.exit()
 
-def exit():
-  message('Thank you for using Zoomify')
-  sys.exit()
-
-
-def options():
-  option = input()
-  if option == 'L':
-    print('you have looged in successfully')
-  elif option == 'E':
-    sys.exit('Thanks for using Zoomify enjoy your new Zoomify time!')
-  elif option == 'B':
-    print('you have gone back')
-  elif option == "R":
-    print('you have successfully ran a report' )
-  elif option == 'V':
-    print('visual success')
-  
+    
 
 if __name__ == '__main__':
-  welcome()
-  welcome_menu()
-  main_menu()
+  new_menu = Menu()
+
+  new_menu.get_env_vars()
+  new_menu.welcome()
+  new_menu.welcome_menu()
+  # main_menu()
   # test_menu()

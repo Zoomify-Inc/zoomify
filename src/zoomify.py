@@ -3,6 +3,7 @@ import requests
 from requests import Response
 from datetime import date, datetime
 import math
+from src.g_sheets.google_api import GoogleSheet
 
 
 class Zoomify:
@@ -68,6 +69,23 @@ class Zoomify:
         
 
         return participants
+
+    def export_participant_data(self, uuid):
+        url = f"{self.reports_url}/{uuid}/participants"
+        query_params = {
+            "page_size": 30
+        }
+        r = (requests.get(url, headers={"Authorization": f"Bearer {self.JWT}"}, 
+        params=query_params)).json()
+
+        spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1WzZMRT4JSRIx1kRg44MbzunKjClnEeHIkLiarGyjuww/edit?usp=sharing'
+        sheet = GoogleSheet(spreadsheet_url)
+
+        participants = r['participants']
+        sheet.add_participants(participants, 0)
+
+
+
 
     def check_attendance(self, participants):
         # sample_attendance = ['Roger Huba', 'Joshua Huston', 'Alex Payne' ]

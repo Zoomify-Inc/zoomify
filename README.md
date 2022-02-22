@@ -12,7 +12,7 @@
 - Enjoy working with front-end and back-end
 - Generally enjoy getting to looking for bugs in already written code
 **How can you best utilize these strengths in the execution of your project?**  
-- I’m always down to do some peer coding so that everyone can get a better understanding of what’s going on! 
+- I’m always down to do some peer coding so that everyone can get a better understanding of what’s going on!
 - I’m also happy to do any of the presentation stuff.
 
 **In which professional competencies do you each want to develop greater strength?**

@@ -38,7 +38,7 @@ class Menu:
     Command Options:
 
     - Check Attendance Report: "R"
-    - Data Visualization Tool: "V"
+    - Export to Google Sheets: "G"
     - Main Menu: "M"
     - Exit Program: "E"
     '''
@@ -50,19 +50,19 @@ class Menu:
     print()
     if user_input.lower() == 'r':
       self.attendance_report()
-    elif user_input.lower() == 'v':
-      self.data_visualization()
+    elif user_input.lower() == 'g':
+      self.google_sheets()
     elif user_input.lower() == 'm':
       self.main_menu()
     elif user_input.lower() == 'e':
-      exit()
+      self.exit()
     else: 
       self.paragraph_message('You have entered a invalid option please try again.')
       self.command_options()
 
     
   def welcome(self):
-    self.title_message("Welcome to Zoomify's Attendance Checker", Fore.BLUE)
+    self.title_message("Welcome to Zoomify's Attendance Checker", Fore.CYAN)
 
   def welcome_menu(self):
     init(autoreset=True)
@@ -91,8 +91,8 @@ class Menu:
     '''
     self.paragraph_message(title, Fore.LIGHTGREEN_EX)
     email = input("Enter your email > ")
-    uuid = self.zoom.get_meeting_reports(email)
-    self.participants = self.zoom.get_meeting_participants(uuid)
+    self.uuid = self.zoom.get_meeting_reports(email)
+    self.participants = self.zoom.get_meeting_participants(self.uuid)
     
     self.command_options()
 
@@ -103,12 +103,15 @@ class Menu:
     self.command_options()
 
 
-  def data_visualization(self):
-    self.title_message("Data Visualization", Fore.GREEN)
+  def google_sheets(self):
+    self.title_message("Google Sheets", Fore.GREEN)
+    self.paragraph_message("This export process may take a moment... ", Fore.LIGHTGREEN_EX)
+    print("https://docs.google.com/spreadsheets/d/1WzZMRT4JSRIx1kRg44MbzunKjClnEeHIkLiarGyjuww/edit?usp=sharing")
+    self.zoom.export_participant_data(self.uuid)
     self.command_options()
 
   def exit(self):
-    self.title_message('Thank you for using Zoomify', Fore.LIGHTYELLOW_EX)
+    self.title_message('Thank you for using Zoomify', Fore.LIGHTRED_EX)
     sys.exit()
 
     

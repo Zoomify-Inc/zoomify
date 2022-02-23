@@ -76,7 +76,7 @@ class Menu:
       print()
       self.welcome_menu()
     if user_input.lower() == 'e':
-      exit()
+      self.exit()
 
   def main_menu(self):
     self.title_message('Main Menu', Fore.GREEN)

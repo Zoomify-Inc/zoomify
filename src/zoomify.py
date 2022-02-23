@@ -21,7 +21,6 @@ class Zoomify:
     def get_meeting_reports(self, email):
         url = f"{self.users_url}/{email}/meetings"        
         now = datetime.now()
-        # Here we will had to add an option of how far back we go checking meetings
         query_params = {
                 "from": "2018-09-13",
                 "to": str(now.strftime("%Y-%m-%d")),

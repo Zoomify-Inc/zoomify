@@ -1,3 +1,4 @@
 .env
 poetry.lock
 googleAPICreds.json
+__pycache__

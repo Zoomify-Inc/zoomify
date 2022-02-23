@@ -8,30 +8,14 @@ class GoogleSheet():
 
     def __init__(self, spreadsheet_url):
         # Authorization
-        self.client = pygsheets.authorize(service_file='googleAPICreds.json')
+        self.client = pygsheets.authorize(service_account_file='googleAPICreds.json')
         self.spreadsheet_url = spreadsheet_url
         self.sheet = self.client.open_by_url(spreadsheet_url)
 
         # we should get this data from the API eventually 
         data = self.client.sheet.get('1WzZMRT4JSRIx1kRg44MbzunKjClnEeHIkLiarGyjuww')
 
-    def export_to_sheet(self):
-        # Create empty dataframe
-        df = pd.DataFrame()
-
-        # Create a column
-        df = pd.read_json('meeting_data.json')
-
-        #df.to_csv('meeting_data.csv')
-        #print("\nInput CSV file = \n", df)
-
-        #select the first sheet 
-        wks = self.sheet[0]
-
-        # update the first sheet with df, starting at cell B2. 
-        wks.set_dataframe(df,(1,1))
-
-
+ 
     def update_headers(self, headers, page_number):
         wks = self.sheet[page_number]
 
@@ -85,12 +69,7 @@ class GoogleSheet():
         wks.update_cells(all_updates)
 
 
-    
-
-        
-
-
-            
+      
 if __name__ == '__main__':
     # Connect to specific sheet 
     spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1WzZMRT4JSRIx1kRg44MbzunKjClnEeHIkLiarGyjuww/edit?usp=sharing'

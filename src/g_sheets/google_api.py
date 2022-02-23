@@ -51,23 +51,41 @@ class GoogleSheet():
         # Specify page number to insert data
         wks = self.sheet[page_number]
 
-        for i in range(len(data)):
+        seen = set()
+        iteration_count = row_index = 0
+        while iteration_count < len(data):
+            if data[iteration_count]['name'] in seen:
+                iteration_count += 1
+                continue
+            else:
+                seen.add(data[iteration_count]['name'])
+
             columns = 5
             data_dict = {0: 'name', 1: 'join_time', 2: 'leave_time', 3: 'user_email', 4: 'id'}
-    
+
             for j in range(columns):   
-                cell = wks.cell(alphabet[j] + str(i + 2))
+                cell = wks.cell(alphabet[j] + str(row_index + 2))
                 key = data_dict[j]
-                cell.value = data[i][key]
+                cell.value = data[iteration_count][key]
+        
+            iteration_count += 1
+            row_index += 1
 
         # Identify start and end of cell range   
         start_cell = 'A2'
-        end_cell = 'E' + str(len(data) + 1)
+        end_cell = 'E' + str(len(seen) + 1)
+        cell_range = wks.range('%s:%s' % (start_cell, end_cell))
+        
+        # Batch updates so there is only one update request sent
+        all_updates = []
+        for row in cell_range:
+            all_updates += row
+        
+        # Send update request
+        wks.update_cells(all_updates)
 
-        # Update all cells
-        rows = wks.range('%s:%s' % (start_cell, end_cell))
-        for row in rows:
-            wks.update_cells(row)
+
+    
 
         
 

@@ -1,3 +1,5 @@
+from ast import Index
+import sys
 from authlib.jose import jwt
 import requests
 from requests import Response
@@ -34,9 +36,12 @@ class Zoomify:
         self.format_meetings(meetings)
         
         # Allow user to select the meeting to display information
-        user_selection = int(input('\n Type which meeting you would like to select: '))
-        return meetings[user_selection]['uuid']
-
+        try:
+            user_selection = int(input('\n Type which meeting you would like to select: '))
+            return meetings[user_selection]['uuid']
+        except IndexError as ke:
+            print('Please restart the program and enter a valid key', ke)
+            sys.exit()
 
     def format_meetings(self, meetings):
         #

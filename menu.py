@@ -90,10 +90,13 @@ class Menu:
     *****************************************************************************************************************
     '''
     self.paragraph_message(title, Fore.LIGHTGREEN_EX)
-    email = input("Enter your email > ")
-    self.uuid = self.zoom.get_meeting_reports(email)
-    self.participants = self.zoom.get_meeting_participants(self.uuid)
-    
+    try:
+      email = input("Enter your email > ")
+      self.uuid = self.zoom.get_meeting_reports(email)
+      self.participants = self.zoom.get_meeting_participants(self.uuid)
+    except KeyError as ke:
+      print('Please enter a valid user email', ke)
+      self.welcome_menu()
     self.command_options()
 
 

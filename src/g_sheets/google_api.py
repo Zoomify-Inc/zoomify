@@ -1,6 +1,4 @@
 import pygsheets
-import pandas as pd
-import json
 from string import ascii_uppercase as alphabet
 
 
@@ -67,18 +65,3 @@ class GoogleSheet():
         
         # Send update request
         wks.update_cells(all_updates)
-
-
-      
-if __name__ == '__main__':
-    # Connect to specific sheet 
-    spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1WzZMRT4JSRIx1kRg44MbzunKjClnEeHIkLiarGyjuww/edit?usp=sharing'
-
-    googleSheet = GoogleSheet(spreadsheet_url)
-
-    # Rather than loading json file we will get participant data from API
-    f = open('meeting_data.json')
-    data = json.load(f)
-    participants = data['participants']
-
-    googleSheet.add_participants(participants, 0)

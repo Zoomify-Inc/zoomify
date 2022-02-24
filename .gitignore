@@ -2,3 +2,4 @@
 poetry.lock
 googleAPICreds.json
 __pycache__
+.pytest_cache

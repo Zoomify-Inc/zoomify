@@ -44,18 +44,11 @@ class Zoomify:
             sys.exit()
 
     def format_meetings(self, meetings):
-        #
-        #{'uuid': 'jxhNkUJ8SLunKbmGJG68Xw==', 'id': 6118089019, 'host_id': 'ZS6Hi-buTWmYhnyK75HtWQ', 'type': 4,
-        #  'topic': "Isaiah Burkes's Personal Meeting Room", 'user_name': 'Isaiah Burkes', 'user_email': 'idkburkes@gmail.com',
-        #  'start_time': '2022-02-19T22:25:30Z', 'end_time': '2022-02-19T22:26:38Z', 'duration': 2, 'total_minutes': 3, 'participants_count': 3, 'source': 'Zoom'} 
-        #
         counter = 0
         for meeting in meetings:
             res = f" [{counter}] - Topic Name: {meeting['topic']} -  Start Time: {meeting['start_time']}"
             counter += 1
             print(res)
-
-        # return res
 
         
         

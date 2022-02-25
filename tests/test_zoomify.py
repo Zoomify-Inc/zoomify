@@ -40,24 +40,6 @@ def test_meeting_participants(zoomify):
   builtins.input = real_input
 
 
-# def test_format_meetings(zoomify):
-#   inputs = [0]
-#   def mock_input(*args):
-#     return inputs.pop(0)
-#   real_input = builtins.input
-#   builtins.input = mock_input
-#   mtg_obj = zoomify.get_meeting_reports('joshua.david.huston@gmail.com')
-#   print(mtg_obj)
-#   formatted_mtg = zoomify.format_meetings(mtg_obj)
-#   print(formatted_mtg)
-#   # actual = formatted_mtg
-#   # # expected = "S04FR9NfQ3S4M43QZ+isPQ=="
-#   # assert expected == actual
-#   builtins.input = real_input
-#   assert actual == expected
-
-
-
 
 
 

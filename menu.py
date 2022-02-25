@@ -23,7 +23,6 @@ class Menu:
     self.zoom = Zoomify(ZOOM_API_KEY, ZOOM_API_SECRET, ZOOM_JWT)
 
   # Instantiate Zoomify object
-
   def title_message(self, str, color=Fore.RED):
     message = pyfiglet.figlet_format(str)
     init(autoreset=True)
@@ -125,5 +124,3 @@ if __name__ == '__main__':
   new_menu.get_env_vars()
   new_menu.welcome()
   new_menu.welcome_menu()
-  # main_menu()
-  # test_menu()

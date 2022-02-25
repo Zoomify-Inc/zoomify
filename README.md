@@ -12,7 +12,7 @@
 - Enjoy working with front-end and back-end
 - Generally enjoy getting to looking for bugs in already written code
 **How can you best utilize these strengths in the execution of your project?**  
-- I’m always down to do some peer coding so that everyone can get a better understanding of what’s going on! 
+- I’m always down to do some peer coding so that everyone can get a better understanding of what’s going on!
 - I’m also happy to do any of the presentation stuff.
 
 **In which professional competencies do you each want to develop greater strength?**
@@ -196,3 +196,75 @@ Slack.**
 **How will you communicate that it’s time to merge?**
 
 - 15min at the end of each night
+
+# 401 Mid Term Zoomify 
+
+**Author**: Alex Payne , Eddie Ponce, Victor Sullivan, Isaiah Burkes, and Joshua Huston 
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)  
+**PR**: 
+
+## Overview
+This app will pull from a zoom organization and let users select meetings that have ended and get the attendance of was there. It will then print a attendance report that will show who was in the meeting along with who the percent of folks that were in the meeting. It also give you the ability to export this data to a google sheet for future reference.
+
+## Getting Started
+1. Create a new poetry project this one is called Zoomify
+2. Setup as normal per this guide https://codefellows.github.io/code-401-python-guide/reference/submission-instructions/labs/
+3. Create a new module menu.py 
+4. Import pyfiglet, colorama, pytest, Authlib, python-dotenv, pygsheets, pandas, and pytest-cov 
+
+## Architecture
+
+## Change Log
+### Name of feature: Setup  
+
+Estimate of time needed to complete: 1hr 30min
+
+Start time: 6:30ish
+
+Finish time: 7:38
+
+Actual time needed to complete: 1hrs 8min
+
+### Name of feature: Menu setup 
+Estimate of time needed to complete: 6hrs
+
+Start time: 7:38, 6:30, 9
+
+Finish time: 9:40, 9, 6
+
+Actual time needed to complete: 10hrs
+
+### Name of feature: Zoom API setup 
+Estimate of time needed to complete: 6hrs
+
+Start time: 7:38, 6:30, 9
+
+Finish time: 9:40, 9, 6
+
+Actual time needed to complete: 10hrs
+
+### Name of feature: Google Sheets API setup
+Estimate of time needed to complete: 6hrs
+
+Start time: 7:38, 6:30, 9
+
+Finish time: 9:40, 9, 6
+
+Actual time needed to complete: 10hrs
+
+### Name of feature: testing and cleanup
+Estimate of time needed to complete: 4hrs
+
+Start time: 6:30, 7
+
+Finish time: 9:30, 8:50
+
+Actual time needed to complete: 5hrs
+
+
+
+## Credits 
+Roger, [How to print colored text in Python](https://stackabuse.com/how-to-print-colored-text-in-python/)[ASCII art using Python pyfiglet module](https://www.tutorialspoint.com/ascii-art-using-python-pyfiglet-module), 
+[colorama 0.4.4](https://pypi.org/project/colorama/), 
+[How to create a menu for a python console application?](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/), 
+[simple-term-menu 1.4.1](https://pypi.org/project/simple-term-menu/), Zoom API Docs, Google API docs

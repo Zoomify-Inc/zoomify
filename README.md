@@ -25,16 +25,19 @@
 
 **What are the key strengths of each person on the team?**  
 
-- I’m decent at working with API’s.
+- I enjoy working with API's on the back end and love rendering parsed data into front end code!
 - Enjoy working on UI / UE tasks.
+- Flexible, adaptible, and dependable
 
 **How can you best utilize these strengths in the execution of your project?**
 
 - I can help troubleshoot API issues and also help with the design-layout of the application.
+- I can create an easy-to-use CLI for the majority of users
+- If we run into obstacles, I can help come up with a alternative solution.
 
  **In which professional competencies do you each want to develop greater strength?**  
 
-- Hoping to get better at my technical skills. I’m still having a tough time with data structures and algorithms.
+- Hoping to get better at my technical skills, specifically data strctures and algorithms.
 
 **Knowing that every person in your team needs to understand all aspects of the project, how do you plan to approach the day-to-day work?**  
 
@@ -263,8 +266,11 @@ Actual time needed to complete: 5hrs
 
 
 
-## Credits 
-Roger, [How to print colored text in Python](https://stackabuse.com/how-to-print-colored-text-in-python/)[ASCII art using Python pyfiglet module](https://www.tutorialspoint.com/ascii-art-using-python-pyfiglet-module), 
-[colorama 0.4.4](https://pypi.org/project/colorama/), 
-[How to create a menu for a python console application?](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/), 
-[simple-term-menu 1.4.1](https://pypi.org/project/simple-term-menu/), Zoom API Docs, Google API docs
+## Credits
+Roger Huba
+- [How to print colored text in Python](https://stackabuse.com/how-to-print-colored-text-in-python/)[ASCII art using Python pyfiglet module](https://www.tutorialspoint.com/ascii-art-using-python-pyfiglet-module)
+- [colorama 0.4.4](https://pypi.org/project/colorama/)
+- [How to create a menu for a python console application?](https://computinglearner.com/how-to-create-a-menu-for-a-python-console-application/)
+- [simple-term-menu 1.4.1](https://pypi.org/project/simple-term-menu/)
+- Zoom API Docs
+- Google API docs
